@@ -1,0 +1,43 @@
+{% extends 'admin/structure.html' %}
+
+
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6 jumbotron">
+            <h2>Please Login</h2> <hr>
+
+            {% if msg %}
+                <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Warning!</strong> {{ msg }}
+                </div>
+            {% endif %}
+
+            <form class="form-horizontal" method="post" action="{{ url_for('admin') }}">
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="username">Username:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="admin">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="password">Password:</label>
+                    <div class="col-sm-7">
+                        <input type="password" class="form-control" id="password" name="password"
+                               placeholder="Enter password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3">
+                        <button type="submit" class="btn btn-success" name="login_submit">login <span
+                                class="glyphicon glyphicon-log-in"></span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+
+  # MySql
+  mysqlDB:
+    image: "mysql:5.7"
+    container_name: face_recognition_mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_DATABASE=db_flask_app
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=secretPassword
+    volumes:
+      - ./datadir/:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  
+  # phpMyAdmin
+  phpmyadmin:
+    depends_on:
+      - mysqlDB
+    image: phpmyadmin/phpmyadmin
+    container_name: face_recognition_phpMyAdmin
+    restart: always
+    ports:
+      - 8090:80
+    environment:
+      PMA_HOST: mysqlDB
+      MYSQL_ROOT_PASSWORD: secretPassword
+  
+  # App
+  app:
+    image: face_recognition
+    build: .
+    container_name: face_recognition_app
+    command: python3 app.py
+    depends_on:
+      - mysqlDB
+    links:
+      - "mysqlDB:localhost"
+    ports:
+      - "5000:5000"
+    volumes:
+      - '.:/flask_app'
+

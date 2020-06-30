@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% block title %}
+        <title>Admin Panel</title>
+    {% endblock %}
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</head>
+
+<body>
+
+    {% block header %}
+    {% endblock %}
+
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
+
+    {% block footer %}
+    {% endblock %}
+
+</body>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</html>

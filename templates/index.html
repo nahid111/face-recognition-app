@@ -1,0 +1,83 @@
+{% extends 'structure.html' %}
+
+
+{% block header %}
+
+    <div class="text-center">
+        <h1 style="color: #2196F3">Simple Face Recognition System</h1>
+        <hr>
+        <h4>Submit a group photo or a single image to find out whether the people in the photo are registered in the Database</h4>
+        <br>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-sm-12 text-center">
+
+            <form class="form-inline" method="post" action="{{ url_for('compareProcess') }}" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="unknownImage">Upload Photo:</label>
+                    <input type="file" class="form-control" id="unknownImage" name="unknownImage">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+
+        </div>
+    </div>
+    <hr>
+
+
+    {% if rows %}
+
+        <div class="row">
+
+            <div class="col-sm-offset-3 col-sm-6">
+                <h2>Possible Matches</h2>
+
+               <table class="table table-striped table-bordered table-auto text-center">
+                    <thead>
+                        <th>Name</th><th>ID</th><th>Photo</th>
+                    </thead>
+                    <tbody>
+
+                    {% for row in rows %}
+                        <tr>
+
+                            <td> {{ row.name }} </td>
+                            <td> {{ row.id }} </td>
+
+                            <td>
+                                <img class="img-responsive img-rounded" src="/image/{{ row.sl }}">
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+    {% endif %}
+
+    {% if rows==[] %}
+        <div class="row col-sm-offset-3 col-sm-6 text-center">
+            <div class="alert alert-danger alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>No match found...!</strong>
+            </div>
+        </div>
+    {% endif %}
+
+
+
+
+{% endblock %}

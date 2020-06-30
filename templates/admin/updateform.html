@@ -1,0 +1,57 @@
+{% extends 'admin/structure.html' %}
+{% include 'admin/navbar.html' %}
+
+
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <h2>Update Student Info</h2>
+            <hr>
+
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="{{ url_for('updateProcess') }}">
+
+                <input style="display: none;" value="{{ row.sl }}" name="sl">
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="id">ID:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="id" name="id" value="{{ row.id }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="name">Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" name="name" value="{{ row.name }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Current Photo:</label>
+                    <div class="col-sm-10">
+                        <img class="img-responsive" src="/image/{{ row.sl }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="pic">Choose New Photo:</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="pic" placeholder="Choose Photo" name="pic">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">Update</button>
+                        <a class="btn btn-danger" href="{{ url_for('viewAll') }}">Cancel</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
